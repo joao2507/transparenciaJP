@@ -1,0 +1,158 @@
+
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+#index .km-content{
+    background-image: url('images/bg_index.png');
+    background-position: center center;
+    background-size: 100% 100%;
+}
+/*
+.bgindex{width: 100%;height: 100%;position: absolute;top: 0;left: 0;bottom: 0;right: 0;z-index: -4;}
+*/
+#index nav#botoes{margin: 0 auto;}
+#index .logo-app{margin-top: 30px;text-align: center;}
+#index .logo-pmjp{margin-bottom: 30px;text-align: center;margin-top: 10px;}
+
+#index .box{
+    float: left;margin-right: 5px;display: table;margin-bottom: 0.5em;
+}
+#index .box a{
+    display: table-cell;
+    vertical-align: middle;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;width: 100%;height: 100%;text-transform: uppercase;
+}
+#index .box a:active{
+    position:relative;top:1px;left: 1px;background-color: #0770a7;
+}
+
+nav#botoes .box:nth-child(1) {background:url(images/bg-menu1.png);}
+nav#botoes .box:nth-child(2) {background:url(images/bg-menu2.png);margin-right: 0 !important;}
+nav#botoes .box:nth-child(3) {background:url(images/bg-menu3.png);}
+nav#botoes .box:nth-child(4) {background:url(images/bg-menu4.png);margin-right: 0 !important;}
+nav#botoes .box:nth-child(3) a{color: #0a4d85}
+nav#botoes .box:nth-child(5) {background:url(images/bg-menu5.png);}
+nav#botoes .box:nth-child(4) a{color: #0a4d85}
+nav#botoes .box:nth-child(6) {background:url(images/bg-menu6.png);}
+nav#botoes .box:nth-child(6) a{color: #0a4d85}
+
+.tema .km-navbar {
+    background-color: #737373 !important;
+    color: #fff !important;
+}
+.tema .km-navbar .km-button{
+    background-color: #0974ab;
+}
+.tema .km-navbar .km-rightitem{
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+.tema .km-navbar .km-rightitem img{
+    margin-left: 10px;
+}
+.tema .km-navbar a{
+    color: #fff !important;
+}
+
+.tema .button{
+    background-color: #0770a7;color: #fff;
+}
+
+@media only screen and (max-width : 480px) {
+    #index nav#botoes{width: 310px;}
+    .box {width: 152px;height: 152px;}
+    #index .box a{font-size: 16px;}
+}
+@media only screen and (max-width : 650px) and (min-width : 481px) {
+    #index nav#botoes{width: 460px;}
+    .box {width: 227px;height: 227px;}
+    #index .box a{font-size: 20px;}
+}
+@media only screen and (max-width : 1050px) and (min-width : 651px) {
+    #index nav#botoes{width: 460px;}
+    .box {width: 227px;height: 227px;}
+    #index .box a{font-size: 20px;}
+}
+@media only screen and (max-width : 1290px) and (min-width : 1051px) {
+    #index nav#botoes{width: 460px;}
+    .box {width: 227px;height: 227px;}
+    #index .box a{font-size: 20px;}
+}
+
+.receita h3, 
+.telefone h3, 
+.despesa h3{
+    font-size: 1.1em;
+    line-height: 1em;
+    margin: 0;
+    padding: 0;
+    height: 1.1em;
+    overflow: hidden;
+}
+.receita h4, 
+.telefone h4, 
+.despesa h4 {
+    font-size: 0.7em;
+    line-height: 1.4em;
+    margin: 0;
+    padding: 0;
+    height: 1.3em;
+    overflow: hidden;
+}
+.receita p, 
+.telefone p, 
+.despesa-historico p, 
+.despesa p {
+    font-size: 0.9em;
+    margin: 0;
+    padding: .3em 0 0;
+}
+
+.telefone h4{
+    font-size: 1.2em !important;
+}
+
+.telefone p{
+    font-size: 1em !important;
+}
+.telefone a{
+    text-decoration: none;
+    color: #00246b;
+}
+
+#telefones-uteis-listview .km-group-title{background: url(images/bg-menu3.png);color: #fff;font-size: 1.4em;text-indent: 0.5em;}
+
+.total{text-align: right;}
+.total h1{
+    line-height: 0.7em;
+    height: 0.5em;
+}
+
+.sales-down,
+.sales-hold,
+.sales-up,
+.value {
+    float: right;
+}
+.sales-up { color: green; }
+.sales-down { color: red; }
+.sales-hold { color: blue; }
+.value { color: #bbb; }
+
+#receita-detalhe .km-list h2, #despesa-detalhe .km-list h2{margin-left: 0;}
+
+.km-flat .km-loader, .km-flat .km-rowinsert, .km-flat .km-state-active, .km-flat .km-scroller-pull, .km-flat .k-slider-selection, .km-flat .km-touch-scrollbar, .km-flat .km-pages .km-current-page, .km-flat .k-slider .k-draghandle, .km-flat .k-slider .k-draghandle:hover, .km-flat .km-tabstrip .km-state-active, .km-flat .km-scroller-refresh.km-load-more, .km-flat .km-popup .k-state-hover, .km-flat .km-popup .k-state-focused, .km-flat .km-popup .k-state-selected, .km-flat .km-actionsheet>li>a:active, .km-flat .km-actionsheet>li>a:hover, .km-flat li.km-state-active .km-listview-link, .km-flat li.km-state-active .km-listview-label, .km-flat .km-listview-label input[type=radio]:checked, .km-flat .km-listview-label input[type=checkbox]:checked{
+    background-color: #0770a7 !important;
+}
+
+.km-flat .km-list input[type=password], .km-flat .km-list input[type=search], .km-flat .km-list input[type=number], .km-flat .km-list input[type=tel], .km-flat .km-list input[type=url], .km-flat .km-list input[type=email], .km-flat .km-list input[type=month], .km-flat .km-list input[type=color], .km-flat .km-list input[type=week], .km-flat .km-list input[type=date], .km-flat .km-list input[type=time], .km-flat .km-list input[type=datetime], .km-flat .km-list input[type=datetime-local], .km-flat .km-list input[type=text]:not(.k-input), .km-flat .km-list select:not([multiple]), .km-flat .km-list .k-dropdown-wrap, .km-flat .km-list textarea{
+    background-color: #ccc !important;
+}

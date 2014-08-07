@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>transparênciaJP</title>
+
+        
+        <link href="styles/kendo.mobile.all.min.css" rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/kendo.mobile.min.js"></script>
+        <script src="js/cultures/kendo.culture.pt-BR.min.js"></script>
+        
+        <script src="phonegap.js"></script>
+        <script src="js/app/SocialSharing.js"></script>
+    </head>
+    <body onload="onLoad()">
+        <div data-role="view" data-title="Início" id="index">
+            <div class="logo-pmjp">
+                <img src="images/logo-pmjp.png" />
+            </div>
+
+            <nav id="botoes" style="display: none;">
+                <div class="box">
+                    <a href="#receita">Receita</a>
+                </div>
+                <div class="box">
+                    <a href="#despesa">Despesas</a>
+                </div>
+                <!--<div class="box">
+                    <a href="#teste">Solicitar Informação</a>
+                </div>
+                <div class="box">
+                    <a href="#">Dados das Secretarias</a>
+                </div>-->
+                <div class="box">
+                    <a href="#telefones-uteis">Telefones Úteis</a>
+                </div>
+                <div class="box">
+                    <a href="#ouvidoria">Ouvidoria</a>
+                </div>
+            </nav>
+
+            <div class="clear"></div>
+
+            <div class="logo-app">
+                <img src="images/logo-app.png" />
+            </div>
+        </div>
+        
+        <div data-role="layout" data-id="tema">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-align="left" data-role="backbutton" class="botao-voltar">Voltar</a>
+                    <span data-role="view-title" data-align="right"></span>
+                    <img src="images/icon-header-app.png" data-align="right">
+                </div>
+            </div>
+            <div data-role="footer">
+
+            </div>
+        </div>
+
+        <!-- RECEITA-->
+        
+        <div data-role="view" data-title="Receita - Ano" data-layout="tema" id="receita" class="tema" data-init="receitaAnoInit">
+            <ul data-role="listview" id="receita-ano-scroll"></ul>
+        </div>
+        
+        <div data-role="view" data-title="Receita - Mês" data-layout="tema" id="receita-mes" class="tema" data-show="receitaMesShow">
+            <div class="total">
+                <h1>Total</h1>
+                <p class="receita-total"></p>
+            </div>
+            <ul data-role="listview" id="receita-mes-scroll"></ul>
+        </div>
+
+        <div data-role="view" data-title="Receita - Lista" data-layout="tema" id="receita-lista" data-show="receitaListaInit" class="tema">
+            <div class="total">
+                <a data-role="button" data-rel="modalview" href="#filtroReceita" data-align="left" style="float: left;margin-left: 1rem;font-size: 0.8em;margin-top: 0.7rem;">Filtro</a>
+                <h1>Total</h1>
+                <p class="receita-total"></p>
+            </div>
+            <ul id="receita-lista-scroll"></ul>
+        </div>
+        <div data-role="view" data-title="Receita - Detalhe" data-layout="tema" id="receita-detalhe" data-show="receitaDetalheShow" data-before-show='receitaDetalheBeforeShow' class="tema">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    <ul>
+                        <li><h2 id="receita-detalhe-titulo"></h2></li>
+                        <li>Entidade <span class="sales-up" id="receita-detalhe-entidade"></span></li>
+                        <li>Competência <span class="sales-up" id="receita-detalhe-data"></span></li>
+                        <li>Código Receita <span class="sales-up" id="receita-detalhe-codigo-receita"></span></li>
+                        <li>Valor <span class="sales-up" id="receita-detalhe-valor"></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <script type="text/x-kendo-template" id="receita-lista-scroll-template">
+            <a href='\#receita-detalhe?ano=#:ano_refe#&mes=#:mes_refe#&entidade=#:codi_enti#&cod_receita=#:codi_rece#'>
+                <div class="receita">
+                    <h4>#: nome_enti # - #: mes_refe #/#: ano_refe #</h4>
+                    <h3>#: desc_rece #</h3>
+                    <p>#: valo_arre #</p>
+                </div>
+            </a>
+        </script>
+        
+        <div data-role="modalview" id="filtroReceita" data-open="filtroReceitaInit" style="width: 95%; height: auto;" data-count="0">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-click="closeModalFiltroReceita" data-role="button" data-align="left">Cancelar</a>
+                    <span>Filtro</span>
+                    <a data-click="filtrarReceitaButton" data-role="button" data-align="right" style="background-color: #005ab7; color: white;">OK</a>
+                </div>
+            </div>
+
+            <ul data-role="listview" data-style="inset">
+                <li><label for="entidade">Entidade</label> <select class="dropdown" id="entidade"><option value="">TODAS</option></select></li>
+            </ul>
+        </div>
+        
+        <!-- FIM RECEITA -->
+
+        <!-- DESPESA -->
+        
+        <div data-role="view" data-title="Despesa - Ano" data-layout="tema" id="despesa" class="tema" data-init="despesaAnoInit">
+            <ul data-role="listview" id="despesa-ano-scroll"></ul>
+        </div>
+        
+        <div data-role="view" data-title="Despesa - Mês" data-layout="tema" id="despesa-mes" class="tema" data-show="despesaMesShow">
+            <div class="total">
+                <h1>Total</h1>
+                <p class="despesa-total"></p>
+            </div>
+            <ul data-role="listview" id="despesa-mes-scroll"></ul>
+        </div>
+        
+        <div data-role="view" data-title="Despesa - Orgão" data-layout="tema" id="despesa-orgao" class="tema" data-show="despesaOrgaoShow">
+            <div class="total">
+                <h1>Total</h1>
+                <p class="despesa-total"></p>
+            </div>
+            <ul data-role="listview" id="despesa-orgao-scroll"></ul>
+        </div>
+
+        <div data-role="view" data-title="Despesa - Lista" data-layout="tema" id="despesa-lista" data-show="despesaListaInit" class="tema">
+            <div class="total">
+                <a data-role="button" data-rel="modalview" href="#filtroDespesa" data-align="left" style="float: left;margin-left: 1rem;font-size: 0.8em;margin-top: 0.7rem;">Filtro</a>
+                <h1>Total</h1>
+                <p class="despesa-total"></p>
+            </div>
+            <ul id="despesa-lista-scroll"></ul>
+        </div>
+        <div data-role="view" data-title="Despesa - Detalhe" data-layout="despesa-detalhe-layout" id="despesa-detalhe" data-show="despesaDetalheShow" data-before-show='despesaDetalheBeforeShow' class="tema">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                 <li>
+                    <ul>
+                        <li><h2 id="despesa-detalhe-nome_forn">desc_tpde</h2></li>
+                    </ul>
+                </li>
+                <li>Entidade
+                    <ul>
+                        <li>Entidade<span class="sales-up" id="despesa-detalhe-nome_enti"></span></li>
+                        <li>Orgão<span class="sales-up" id="despesa-detalhe-desc_orga"></span></li>
+                    </ul>
+                </li>
+                <li>Empenho
+                    <ul>
+                        <li>Número <span class="sales-up" id="despesa-detalhe-nume_empe"></span></li>
+                        <li>Tipo <span class="sales-up" id="despesa-detalhe-desc_tpem"></span></li>
+                        <li>Ano<span class="sales-up" id="despesa-detalhe-ano_empe"></span></li>
+                        <li>Data<span class="sales-up" id="despesa-detalhe-data_empe"></span></li>
+                        <li>Valor <span class="sales-up" id="despesa-detalhe-valo_empe"></span></li>
+                        <li>Descrição <span class="sales-up" id="despesa-detalhe-desc_itee"></span></li>
+                    </ul>
+                </li>
+                <li>Despesa
+                    <ul>
+                        <li>Tipo <span class="sales-up" id="despesa-detalhe-desc_tpde"></span></li>
+                        <li>Fonte de Recursos <span class="sales-up" id="despesa-detalhe-desc_forc"></span></li>
+                        <li>Código Elemento <span class="sales-up" id="despesa-detalhe-codi_elem"></span></li>
+                        <li>Processo <span class="sales-up" id="despesa-detalhe-nume_proc"></span></li>
+                        <li>Competência <span class="sales-up" id="despesa-detalhe-data"></span></li>
+                        <li>Descrição <span class="sales-up" id="despesa-detalhe-desc_desp"></span></li>
+                    </ul>
+                </li>
+                <li>Licitação
+                    <ul>
+                        <li>Tipo<span class="sales-up" id="despesa-detalhe-desc_tpli"></span></li>
+                        <li>Número<span class="sales-up" id="despesa-detalhe-nume_lici"></span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div data-role="view" data-title="Despesa - Histórico" data-layout="despesa-detalhe-layout" id="despesa-historico" class="tema" data-show="despesaHistoricoShow">
+            <ul id="despesa-historico-listview"></ul>
+        </div>
+        
+        <script type="text/x-kendo-template" id="template-despesa-historico">
+            <div class="despesa-historico">
+                <p>Descrição<span class="sales-up">#:desc_tpmo#</span></p>
+                <p>Parcela<span class="sales-up">#:nume_parc#</span></p>
+                <p>Valor<span class="sales-up">#:valo_movi#</span></p>
+            </div>
+        </script>
+        
+        <div data-role="layout" data-id="despesa-detalhe-layout">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-align="left" data-role="backbutton">Voltar</a>
+                    <span data-role="view-title" data-align="right"></span>
+                    <img src="images/icon-header-app.png" data-align="right">
+                </div>
+            </div>
+
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a id="link-despesa-detalhe" href="#despesa-detalhe" data-icon="about">Detalhe</a>
+                    <a id="link-despesa-historico" href="#despesa-historico" data-icon="recents">Histórico</a>
+                    <a id="link-despesa-compartilhar" href="javascript:void()" data-rel="external" data-icon="share">Compartilhar</a>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/x-kendo-template" id="despesa-lista-scroll-template">
+            <a href='\#despesa-detalhe?empenho=#:nume_empe#&ano=#:ano_refe#&mes=#:mes_refe#'>
+                <div class="despesa">
+                    <h4>#:desc_desp# - #: mes_refe #/#: ano_refe #</h4>
+                    <h3>#: desc_tpde #</h3>
+                    <p>#: nome_enti # / #: desc_orga #</p>
+                    <p><strong>#: nome_forn #</strong></p>
+                    <p>#: valo_empe #</p>
+                </div>
+            </a>
+        </script>
+        
+        <div data-role="modalview" id="filtroDespesa" data-open="filtroDespesaInit" style="width: 95%; height: auto;" data-count="0">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-click="closeModalFiltroDespesa" data-role="button" data-align="left">Cancelar</a>
+                    <span>Filtro</span>
+                    <a data-click="filtrarDespesaButton" data-role="button" data-align="right" style="background-color: #005ab7; color: white;">OK</a>
+                </div>
+            </div>
+
+            <ul data-role="listview" data-style="inset">
+                <li><label for="despesa-filtro-entidade">Entidade</label> <select class="dropdown" id="despesa-filtro-entidade"><option value="">TODAS</option></select></li>
+                <li><label for="despesa-filtro-tipo-empenho">Tipo Empenho</label> <select class="dropdown" id="despesa-filtro-tipo-empenho"><option value="">TODOS</option></select></li>
+                <li><label for="despesa-filtro-fonte-recursos">Fonte de Recursos</label> <select class="dropdown" id="despesa-filtro-fonte-recursos"><option value="">TODAS</option></select></li>
+                <li><label for="despesa-filtro-empenho">Número Empenho</label> <input type="search" id="despesa-filtro-empenho" /></li>
+                <li><label for="despesa-filtro-fornecedor">Fornecedor</label> <input type="search" id="despesa-filtro-fornecedor" /></li>
+            </ul>
+        </div>
+        
+        <!-- FIM DESPESA -->
+        
+        <!-- TELEFONES UTEIS -->
+        <div data-role="view" data-title="Telefones Úteis" data-layout="tema" id="telefones-uteis" class="tema" data-init="telefonesInit">
+            <ul data-role="listview" data-style="inset" id="telefones-uteis-listview"></ul>
+        </div>
+        <script type="text/x-kendo-template" id="telefones-uteis-template">
+            <div class="telefone">
+                <h4>#:local#</h4>
+                <p><a href="tel:#:telefone#">#:telefone#</a></p>
+            </div>
+        </script>
+        <!-- FIM TELEFONES UTEIS -->
+        
+        <!-- OUVIDORIA -->
+        <div data-role="view" data-title="Ouvidoria" data-layout="tema" id="ouvidoria" class="tema" data-init="ouvidoriaInit">
+            <ul id="ouvidoria-formato" data-index="0">
+                <li>
+                    Identificar
+                </li>
+                <li>
+                    Anônimo
+                </li>
+            </ul>
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label>Nome
+                        <input type="search" id="ouvidoria-normal-nome" />
+                    </label>
+                </li>
+                <li>
+                    <label>Email
+                        <input type="search" id="ouvidoria-normal-email" />
+                    </label>
+                </li>
+                <li>
+                    <label>Gênero
+                        <select class="dropdown" id="ouvidoria-normal-genero">
+                            <option value="">Selecione seu gênero</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Transexual Masculino">Transexual Masculino</option>
+                            <option value="Transexual Feminino">Transexual Feminino</option>
+                            <option value="Travesti">Travesti</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label>Orientação Sexual
+                        <select class="dropdown" id="ouvidoria-normal-orientacao-sexual">
+                            <option value="">Selecione a sua Orientação Sexual</option>
+                            <option value="Hétero">Hétero</option>
+                            <option value="Lésbica">Lésbica</option>
+                            <option value="Gay">Gay</option>
+                            <option value="Bissexual">Bissexual</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label>Etnia
+                        <select class="dropdown" id="ouvidoria-normal-etnia">
+                            <option value="">Selecione a sua Etnia</option>
+                            <option value="Branco(a)">Branco(a)</option>
+                            <option value="Negro(a)">Negro(a)</option>
+                            <option value="Índio(a)">Índio(a)</option>
+                            <option value="Asiático(a)">Asiático(a)</option>
+                            <option value="Pardo(a)">Pardo(a)</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label>Idade
+                        <input type="number" id="ouvidoria-normal-idade" />
+                    </label>
+                </li>
+                <li>
+                    <label>Endereço
+                        <textarea id="ouvidoria-normal-endereco" style="resize: none"></textarea>
+                    </label>
+                </li>
+                <li>
+                    <label>Telefone Residencial
+                        <input type="tel" id="ouvidoria-normal-telefone-residencial" />
+                    </label>
+                </li>
+                <li>
+                    <label>Telefone Comercial
+                        <input type="tel" id="ouvidoria-normal-telefone-comercial" />
+                    </label>
+                </li>
+                <li>
+                    <label>Telefone Celular
+                        <input type="tel" id="ouvidoria-normal-telefone-celular" />
+                    </label>
+                </li>
+                <li>
+                    <label>Mensagem
+                        <textarea id="ouvidoria-normal-mensagem" style="resize: none"></textarea>
+                    </label>
+                </li>
+            </ul>
+            <ul data-role="listview" data-style="inset" style="display:none">
+                <li>
+                    <label>Mensagem
+                        <textarea id="ouvidoria-anonimo-mensagem" style="resize: none"></textarea>
+                    </label>
+                </li>
+            </ul>
+            <a data-click="ouvidoriaEnviar" data-role="button" style="width: 98%;text-align: center;margin: 2rem auto;display: block;background-color: #0770a7;color:#fff;font-size: 1.2em;">Enviar</a>
+        </div>
+        <!-- FIM OUVIDORIA -->
+        
+        <div data-role="modalview" id="modal-alert" style="width: 95%; height: 8em">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span id="modal-alert-titulo">Alerta</span>
+                    <a data-click="closeModalAlert" data-role="button" data-align="right">OK</a>
+                </div>
+            </div>
+            <div align='center'><p id="modal-alert-texto"></p></div>
+        </div>
+        
+        <script type="text/javascript" src="js/app/functions.js"></script>
+        <script type="text/javascript" src="js/ping.js"></script>
+        <script type="text/javascript" src="js/app/main.js"></script>
+        <script type="text/javascript" src="js/app/receita.js"></script>
+        <script type="text/javascript" src="js/app/despesa.js"></script>
+        <script type="text/javascript" src="js/app/ouvidoria.js"></script>
+    </body>
+</html>
